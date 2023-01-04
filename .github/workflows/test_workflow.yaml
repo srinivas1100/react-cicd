@@ -10,3 +10,12 @@ jobs:
         run: npm ci
       - name: run tests
         run: npm test
+  deploy: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code
+        uses: actions/checkout@v3
+      - name: install dependencies
+        run: npm ci
+      - name: deploy code
+        run: echo "Deploying ..."
