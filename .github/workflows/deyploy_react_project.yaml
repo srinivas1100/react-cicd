@@ -30,9 +30,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: dist-fold
-          path: |
-            dist
-            package.json
+          path: dist
   # deploy:
   #   # strategy:
   #   #   matrix:
