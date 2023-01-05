@@ -21,7 +21,7 @@ jobs:
       - name: generate build
         run: npm run build
   deploy: 
-    needs: tests
+    needs: build-project
     runs-on: ubuntu-latest
     steps:
       - name: get code
