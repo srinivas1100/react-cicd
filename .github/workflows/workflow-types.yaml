@@ -1,0 +1,19 @@
+name: event-filters
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - "main"
+      - "dev-*" #dev-one dev-two
+      - "stage/**" #stage/one   stage/one/two
+  push:
+    branches:
+      - "main"
+      - "dev-*" #dev-one dev-two
+      - "stage/**" #stage/one   stage/one/two
+    paths-ignore:
+      - ".github/workflows/*"
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
