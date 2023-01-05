@@ -31,18 +31,20 @@ jobs:
         with:
           name: dist-fold
           path: dist
-  # deploy:
-  #   # strategy:
-  #   #   matrix:
-  #   #     version: [10, 12, 14]
-  #   #     os: [ubuntu-latest, windows-latest]
-  #   if: failure()
-  #   needs: build-project
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: clone project
-  #       uses: actions/checkout@v3
-  #     - name: install dependencies
-  #       run: npm ci
-  #     - name: deploy build
-  #       run: echo "build is deployed"
+  deploy:
+    # strategy:
+    #   matrix:
+    #     version: [10, 12, 14]
+    #     os: [ubuntu-latest, windows-latest]
+    if: failure()
+    needs: build-project
+    runs-on: ubuntu-latest
+    steps:
+      - name: get build artificts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-fold
+      - name: file path
+        run: ls
+      - name: deploy build
+        run: echo "build is deployed"
