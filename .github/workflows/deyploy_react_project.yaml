@@ -25,6 +25,7 @@ jobs:
       - name: generate build
         run: npm run build
   deploy:
+    if: failure()
     needs: build-project
     runs-on: macos-latest
     steps:
