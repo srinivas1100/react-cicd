@@ -13,6 +13,8 @@ jobs:
         run: npm ci
       - name: run test cases
         run: npm run test
+      - name: send testcase logs
+        uses: actions/uploadfile@v3
   build-project:
     if: always()
     needs: tests
@@ -24,18 +26,25 @@ jobs:
         run: npm ci
       - name: generate build
         run: npm run build
-  deploy:
-    strategy:
-      matrix:
-        version: [10, 12, 14]
-        os: [ubuntu-latest, windows-latest]
-    if: failure()
-    needs: build-project
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: clone project
-        uses: actions/checkout@v3
-      - name: install dependencies
-        run: npm ci
-      - name: deploy build
-        run: echo "build is deployed"
+      - name: upload artificts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-fold
+          path: |
+            dist
+            package.json
+  # deploy:
+  #   # strategy:
+  #   #   matrix:
+  #   #     version: [10, 12, 14]
+  #   #     os: [ubuntu-latest, windows-latest]
+  #   if: failure()
+  #   needs: build-project
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: clone project
+  #       uses: actions/checkout@v3
+  #     - name: install dependencies
+  #       run: npm ci
+  #     - name: deploy build
+  #       run: echo "build is deployed"
