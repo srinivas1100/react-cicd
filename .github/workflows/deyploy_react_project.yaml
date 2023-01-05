@@ -13,5 +13,14 @@ jobs:
         run: npm ci
       - name: run test cases
         run: npm run test
-
+  build-project:
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone project
+        uses: actions/checkout@v3
+      - name: install dependencies
+        run: npm ci
+      - name: generate build
+        run: npm run build
     
